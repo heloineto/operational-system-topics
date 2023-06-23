@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -7,8 +6,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void printMemoryMaps();
-
+// This function prints a memory map
 int main(int argc, char const *argv[])
 {
     // The open function is from the fcntl.h header
@@ -19,18 +17,18 @@ int main(int argc, char const *argv[])
     // 3º - ... -> The permissions of the file to be opened. It is only used if O_CREAT is passed in the flags parameter
     int fd = open("text.txt", O_RDONLY);
 
-    struct stat textStat;
+    struct stat text_stat;
 
     // The fstat function is from the sys/stat.h header
     // int fstat(int, struct stat *);
     // Parameters:
     // 1º - int fd -> The file descriptor of the file to be mapped
     // 2º - struct stat *buf -> A pointer to a struct stat, where the information about the file will be stored
-    fstat(fd, &textStat);
+    fstat(fd, &text_stat);
 
     // The mmap function is from the sys/mman.h header
     // Description: This function maps a file to memory, it's different from reading the file using the read function, because the file is mapped to memory, so you can access it like an array, while the read function reads the file byte by byte. This function is used to read files that are too big to be read using the read function.
-    // void  *mmap(void *, size_t, int, int, int, off_t);
+    // void *mmap(void *, size_t, int, int, int, off_t);
     // Parameters:
     // 1º - void *addr -> The address where the mapping should start. If it is NULL, the kernel
     // 2º - size_t length -> The length of the mapping
@@ -38,10 +36,10 @@ int main(int argc, char const *argv[])
     // 4º - int flags -> The flags of the mapping. It can be: MAP_SHARED, MAP_PRIVATE, MAP_FIXED
     // 5º - int fd -> The file descriptor of the file to be mapped
     // 6º - off_t offset -> The offset in the file where the mapping should start
-    char *ptr = mmap(NULL, textStat.st_size, PROT_READ, MAP_SHARED, fd, 0);
+    char *ptr = mmap(NULL, text_stat.st_size, PROT_READ, MAP_SHARED, fd, 0);
 
     // This prints the contents of the file
-    for (int i = 0; i < textStat.st_size; i++)
+    for (int i = 0; i < text_stat.st_size; i++)
     {
         putchar(*(ptr + i));
     }

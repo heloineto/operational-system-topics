@@ -10,8 +10,7 @@ int main(int argc, char const *argv[])
 
     key_t key = 666;
 
-    // The shmget function is used to create a shared memory segment
-    // Header: #include <sys/ipc.h>
+    // Header: #include <sys/ipc.h> (ipc stands for inter-process communication)
     // Prototype: int shmget(key_t key, size_t size, int shmflg);
     // Parameters:
     // 1º - key_t key -> The key of the shared memory segment
@@ -21,7 +20,7 @@ int main(int argc, char const *argv[])
     int id = shmget(key, 1000000, IPC_CREAT | 0666);
 
     // The shmat function is used to attach a shared memory segment to the address space of the calling process
-    // Header: #include <sys/shm.h>
+    // Header: #include <sys/shm.h> (shm stands for shared memory)
     // Prototype: void *shmat(int shmid, const void *shmaddr, int shmflg);
     // Parameters:
     // 1º - int shmid -> The id of the shared memory segment
@@ -40,7 +39,10 @@ int main(int argc, char const *argv[])
     // Prototype: int shmctl(int shmid, int cmd, struct shmid_ds *buf);
     // Parameters:
     // 1º - int shmid -> The id of the shared memory segment
-    // 2º - int cmd -> The command to be executed
+    // 2º - int cmd -> The command to be executed, it can be:
+    //   - IPC_STAT -> Used to get information about the shared memory segment
+    //   - IPC_SET -> Used to set information about the shared memory segment
+    //   - IPC_RMID -> Used to remove the shared memory segment
     // 3º - struct shmid_ds *buf -> A pointer to a struct shmid_ds
     // Returns: int -> 0 on success; -1 on error
     shmctl(id, IPC_RMID, NULL);

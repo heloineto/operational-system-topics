@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -23,25 +22,25 @@ int main(int argc, char const *argv[])
 {
     char *p = (char *)main;
 
-    int isChild = fork();
+    int is_child = fork();
 
-    if (isChild)
+    if (is_child)
     {
         child(Gmag, 1);
         return 0;
     }
 
-    isChild = fork();
+    is_child = fork();
 
-    if (isChild)
+    if (is_child)
     {
         child(Gp, 2);
         return 0;
     }
 
-    isChild = fork();
+    is_child = fork();
 
-    if (isChild)
+    if (is_child)
     {
         child(p, 3);
         return 0;

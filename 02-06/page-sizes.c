@@ -1,10 +1,8 @@
-
-// A page in c normals has 4096 bytes
-
 #include <stdio.h>
 #include <unistd.h>
 
-//  This function uses the sysconf function to get the page size
+// This function uses the sysconf function to get the page size
+// A page in c normally has 4096 bytes
 int main(int argc, char const *argv[])
 {
     // The sysconf function is from the unistd.h header
