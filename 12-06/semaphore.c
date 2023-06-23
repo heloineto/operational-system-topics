@@ -30,6 +30,7 @@ void *thread()
     }
 }
 
+// gcc -lpthread main.c
 int main(int argc, char const *argv[])
 {
     // sem_init initializes the semaphore
